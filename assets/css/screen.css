@@ -469,12 +469,14 @@ img {
 }
 .credits span {
 	display: block;
+	position: absolute;
+	top: 20px;
 }
 .credits-theme {
-	float: left;
+	left: 20px;
 }
 .credits-software {
-	float: right;
+	right: 20px;
 }
 
 
