@@ -21,7 +21,19 @@ jQuery(function($) {
 			$('#wrapper').fitVids();
 		}
 		video();
-		
+	/* ==========================================================================
+	   Enable DISQUS for AJAX pages
+	   ========================================================================== */
+		function resetDisqus(url, identifier){
+			if (!window.DISQUS) return;
+			window.DISQUS.reset({
+                        	reload: true,
+                        	config: function () {
+                            		this.page.identifier = identifier;
+                            		this.page.url = url;
+                        	}
+                    	});
+		}
 	/* ==========================================================================
 	   Add class for ajax loading
 	   ========================================================================== */
@@ -98,6 +110,7 @@ jQuery(function($) {
 				reload();
 				loading = false;
 				ajaxContainer.fadeIn(500);
+				resetDisqus(State.url, title);
 			});
 		});
 	});
