@@ -25,14 +25,14 @@ jQuery(function($) {
 	   Enable DISQUS for AJAX pages
 	   ========================================================================== */
 		function resetDisqus(url, identifier){
-			if (!window.DISQUS) return;
+			if (!window.DISQUS || !$('#disqus_thread').length) return;
 			window.DISQUS.reset({
-                        	reload: true,
-                        	config: function () {
-                            		this.page.identifier = identifier;
-                            		this.page.url = url;
-                        	}
-                    	});
+				reload: true,
+				config: function () {
+					this.page.identifier = identifier;
+					this.page.url = url;
+				}
+			});
 		}
 	/* ==========================================================================
 	   Add class for ajax loading
@@ -115,18 +115,18 @@ jQuery(function($) {
 		});
 	});
 	$('body').on('click', '.js-ajax-link', function(e) {
-	    e.preventDefault(); 
-	    if (loading === false) {
+		e.preventDefault(); 
+		if (loading === false) {
 			var currentState = History.getState();
 			var url = $(this).prop('href');
 			var title = $(this).attr('title') || null;
 	
-	        if (url.replace(/\/$/, "") !== currentState.url.replace(/\/$/, "")) {
+			if (url.replace(/\/$/, "") !== currentState.url.replace(/\/$/, "")) {
 				loading = true;
 				$('html').addClass('loading');
 				NProgress.start();
 				History.pushState({}, title, url);
-	        }
-	    }
+			}
+		}
 	});
 });
